@@ -100,7 +100,7 @@ func main() {
 		if fn, ok := builtins[cmd]; ok {
 			fn(args[1:])
 		} else {
-			absolutePath, err := findExecutable(cmd)
+			_, err := findExecutable(cmd)
 			if err == nil {
 				executeCommand(cmd, args[1:])
 			} else {
