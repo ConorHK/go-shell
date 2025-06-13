@@ -11,6 +11,9 @@ import (
 )
 
 func exit(exitCodeStrings []string) {
+	if len(exitCodeStrings) == 0 {
+		os.Exit(0)
+	}
 	exitCode, err := strconv.Atoi(exitCodeStrings[0])
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
