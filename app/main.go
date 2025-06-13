@@ -26,7 +26,7 @@ func echo(inputString string) {
 }
 
 func main() {
-	builtins := map[string]func(){
+	builtins := map[string]func(string){
 		"exit": exit,
 		"echo": echo,
 	}
@@ -45,7 +45,7 @@ func main() {
 			exit(commandArgs[1])
 		}
 
-		if fn, ok := builtins[args[0]]; ok {
+		if fn, ok := builtins[commandArg[0]]; ok {
 			fn(commandArgs[1])
 		} else {
 			var commandNotFound string = command + ": command not found"
