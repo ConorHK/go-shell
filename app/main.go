@@ -34,7 +34,7 @@ func typeCommand(builtins map[string]func([]string)) func([]string) {
 		if _, ok := builtins[cmd]; ok {
 			fmt.Printf("%s is a shell builtin\n", cmd)
 		} else {
-			absolutePath, err := searchDirectoriesForFile(pathDirectories(), cmd)
+			absolutePath, err := findExecutable(cmd)
 			if err == nil {
 				fmt.Printf("%s is %s\n", cmd, absolutePath)
 			} else {
@@ -42,6 +42,20 @@ func typeCommand(builtins map[string]func([]string)) func([]string) {
 			}
 		}
 	}
+}
+
+func executeCommand(path string, args []string) {
+	cmd := os.exec.Command(path, strings.Join(args, " "))
+	output, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("%v\n", err)
+	}
+	fmt.Println(string(output))
+}
+
+func findExecutable(cmd string) (absolutePath string, err error) {
+	absolutePath, err := searchDirectoriesForFile(pathDirectories(), cmd)
+	return 
 }
 
 func pathDirectories() []string {
@@ -85,7 +99,12 @@ func main() {
 		if fn, ok := builtins[cmd]; ok {
 			fn(args[1:])
 		} else {
-			fmt.Printf("%s: command not found\n", cmd)
+			absolutePath, err := findExecutable(cmd)
+			if err == nil {
+				executeCommand(absolutePath, args[1:])
+			} else {
+				fmt.Printf("%s: command not found\n", cmd)
+			}
 		}
 	}
 }
