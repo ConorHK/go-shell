@@ -49,7 +49,7 @@ func main() {
 	builtins := make(map[string]func([]string))
 	builtins["exit"] = exit
 	builtins["echo"] = echo
-	builtins["type"] = typeCmd(builtins)
+	builtins["type"] = typeCommand(builtins)
 
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
