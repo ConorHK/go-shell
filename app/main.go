@@ -35,7 +35,7 @@ func typeCommand(builtins map[string]func([]string)) func([]string) {
 		if _, ok := builtins[args[0]]; ok {
 			fmt.Printf("%s is a shell builtin\n", args[0])
 		} else {
-			fmt.Printf("%s: command not found\n", args[0])
+			fmt.Printf("%s: not found\n", args[0])
 		}
 	}
 }
@@ -49,7 +49,7 @@ func main() {
 	builtins := make(map[string]func([]string))
 	builtins["exit"] = exit
 	builtins["echo"] = echo
-	builtins["type"] = typeCommand(builtins)
+	builtins["type"] = typeCmd(builtins)
 
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
