@@ -15,7 +15,7 @@ func main() {
 
 		command, err := bufio.NewReader(os.Stdin).ReadString('\n')
 		if err != nil {
-			fmt.Println("Error")
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		}
 
 		if command == "exit" {
