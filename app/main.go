@@ -51,7 +51,7 @@ func executeCommand(path string, args []string) {
 	if err != nil {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Printf("%s\n", string(output))
+	fmt.Printf("%s", string(output))
 }
 
 func findExecutable(cmd string) (absolutePath string, err error) {
@@ -84,7 +84,6 @@ func fileExists(path string) bool {
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	os.Stdout.Sync()
 
 	builtins := make(map[string]func([]string))
 	builtins["exit"] = exit
