@@ -102,7 +102,7 @@ func main() {
 		} else {
 			absolutePath, err := findExecutable(cmd)
 			if err == nil {
-				executeCommand(absolutePath, args[1:])
+				executeCommand(cmd, args[1:])
 			} else {
 				fmt.Printf("%s: command not found\n", cmd)
 			}
