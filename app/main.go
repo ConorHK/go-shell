@@ -7,8 +7,8 @@ import (
 	"strings"
 	"strconv"
 )
-func handleExit(exitCode int) {
-	exitCode, err := strconv.Atoi(args[1])
+func handleExit(exitCodeString string) {
+	exitCode, err := strconv.Atoi(exitCodeString)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 	}
