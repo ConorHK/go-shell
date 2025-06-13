@@ -9,10 +9,6 @@ import (
 )
 
 
-func parseCommand(command string) []string {
-	return strings.Fields(command)
-}
-
 func exit(exitCodeStrings []string) {
 	exitCode, err := strconv.Atoi(exitCodeStrings[0])
 	if err != nil {
@@ -40,12 +36,9 @@ func typeCommand(builtins map[string]func([]string)) func([]string) {
 	}
 }
 
-func invalidCommand(command string) {
-	var commandNotFound = command + ": command not found"
-	fmt.Println(commandNotFound)
-}
-
 func main() {
+	reader := bufio.NewReader(os.Stdin)
+
 	builtins := make(map[string]func([]string))
 	builtins["exit"] = exit
 	builtins["echo"] = echo
@@ -54,18 +47,13 @@ func main() {
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
 
-		command, err := bufio.NewReader(os.Stdin).ReadString('\n')
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
-		}
+		input, _ := reader.ReadString('\n')
+		args := strings.Fields(strings.TrimSpace(input))
 
-		command = strings.TrimSpace(command)
-		commandArgs := parseCommand(command)
-
-		if fn, ok := builtins[commandArgs[0]]; ok {
-			fn(commandArgs[1:])
+		if fn, ok := builtins[args[0]]; ok {
+			fn(args[1:])
 		} else {
-			invalidCommand(commandArgs[0])
+			fmt.Printf("%s: command not found\n", cmd)
 		}
 	}
 }
