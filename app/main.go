@@ -39,13 +39,13 @@ func main() {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		}
 
-		commandArgs = parseCommand(command)
+		commandArgs := parseCommand(command)
 
 		if commandArgs[0] == "exit" {
-			handleExit(commandArgs[1])
+			exit(commandArgs[1])
 		}
 
-		if fn, ok := funcs[userInput]; ok {
+		if fn, ok := builtins[userInput]; ok {
 			fn(commandArgs[1])
 		} else {
 			var commandNotFound string = command + ": command not found"
