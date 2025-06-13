@@ -2,14 +2,13 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
-	"strings"
 	"strconv"
-	"errors"
+	"strings"
 )
-
 
 func exit(exitCodeStrings []string) {
 	exitCode, err := strconv.Atoi(exitCodeStrings[0])
@@ -56,7 +55,7 @@ func executeCommand(path string, args []string) {
 
 func findExecutable(cmd string) (absolutePath string, err error) {
 	absolutePath, err = searchDirectoriesForFile(pathDirectories(), cmd)
-	return 
+	return
 }
 
 func pathDirectories() []string {
