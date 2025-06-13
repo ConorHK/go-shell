@@ -26,7 +26,7 @@ func echo(inputStrings []string) {
 	fmt.Println(outputString)
 }
 
-func typeCommand(builtins map[string]func([]string)) func[]string) {
+func typeCommand(builtins map[string]func([]string)) func([]string) {
 	return func(args [] string) {
 		if len(args) == 0 {
 			fmt.Println("type: missing argument")
