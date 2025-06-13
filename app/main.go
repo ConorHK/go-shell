@@ -22,7 +22,7 @@ func exit(exitCodeStrings []string) {
 }
 
 func echo(inputStrings []string) {
-	outputString := strings.Join*(inputStrings, " ")
+	outputString := strings.Join(inputStrings, " ")
 	fmt.Println(inputString)
 }
 
