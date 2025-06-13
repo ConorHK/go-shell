@@ -9,8 +9,6 @@ import (
 // Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
 var _ = fmt.Fprint
 
-func evaluate() (output string) {
-}
 func main() {
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
@@ -20,7 +18,7 @@ func main() {
 			fmt.Println("Error")
 		}
 
-		if input == "exit" {
+		if command == "exit" {
 			break
 		}
 		var output = command[:len(command)-1] + ": command not found"
