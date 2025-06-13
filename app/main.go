@@ -13,15 +13,16 @@ func parseCommand(command string) []string {
 	return strings.Fields(command)
 }
 
-func exit(exitCodeString string) {
-	exitCode, err := strconv.Atoi(exitCodeString)
+func exit(exitCodeStrings []string) {
+	exitCode, err := strconv.Atoi(exitCodeStrings[0])
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 	}
 	os.Exit(exitCode)
 }
 
-func echo(inputString string) {
+func echo(inputStrings []string) {
+	outputString := strings.Join*(inputStrings, " ")
 	fmt.Println(inputString)
 }
 
@@ -46,7 +47,7 @@ func main() {
 		}
 
 		if fn, ok := builtins[commandArgs[0]]; ok {
-			fn(commandArgs[1])
+			fn(commandArgs[1:])
 		} else {
 			var commandNotFound string = command + ": command not found"
 			fmt.Println(commandNotFound)
