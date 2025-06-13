@@ -9,7 +9,6 @@ import (
 )
 
 func parseCommand(command string) []string {
-	command = strings.TrimSpace(command)
 	return strings.Fields(command)
 }
 
@@ -40,6 +39,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		}
 
+		command = strings.TrimSpace(command)
 		commandArgs := parseCommand(command)
 
 		if commandArgs[0] == "exit" {
