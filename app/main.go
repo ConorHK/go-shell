@@ -29,7 +29,7 @@ func main() {
 			handleExit(args[1])
 		}
 
-		var output = command[:len(command)-1] + ": command not found"
+		var output = command + ": command not found"
 		fmt.Println(output)
 	}
 }
