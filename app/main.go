@@ -4,10 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
-
-// Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
-var _ = fmt.Fprint
 
 func main() {
 	for {
@@ -18,8 +16,10 @@ func main() {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		}
 
-		if command == "exit" {
-			break
+		command = strings.TrimSpace(command)
+		args := strings.Fields(command)
+		if args[0] == "exit" {
+			os.Exit(args[1])
 		}
 		var output = command[:len(command)-1] + ": command not found"
 		fmt.Println(output)
