@@ -7,11 +7,6 @@ import (
 	"strings"
 	"strconv"
 )
-var builtins = map[string]func([]string){
-	"exit": exit,
-	"echo": echo,
-	"type": typeCommand,
-}
 
 
 func parseCommand(command string) []string {
@@ -31,7 +26,7 @@ func echo(inputStrings []string) {
 	fmt.Println(outputString)
 }
 
-func typeCommand(commands []string) {
+func typeCommand(commands []string, builtins map[string]func([]string)) {
 	if _, ok := builtins[commands[0]]; ok {
 		fmt.Println(commands[0] + " is a shell builtin")
 	} else {
@@ -45,6 +40,12 @@ func invalidCommand(command string) {
 }
 
 func main() {
+	var builtins = map[string]func([]string){
+		"exit": exit,
+		"echo": echo,
+		"type": func(args []string) { typeCommand(builtins, args) },
+	}
+
 	for {
 		fmt.Fprint(os.Stdout, "$ ")
 
