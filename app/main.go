@@ -45,7 +45,7 @@ func main() {
 			exit(commandArgs[1])
 		}
 
-		if fn, ok := builtins[userInput]; ok {
+		if fn, ok := builtins[args[0]]; ok {
 			fn(commandArgs[1])
 		} else {
 			var commandNotFound string = command + ": command not found"
