@@ -50,7 +50,8 @@ func main() {
 		input, _ := reader.ReadString('\n')
 		args := strings.Fields(strings.TrimSpace(input))
 
-		if fn, ok := builtins[args[0]]; ok {
+		cmd := args[0]
+		if fn, ok := builtins[cmd]; ok {
 			fn(args[1:])
 		} else {
 			fmt.Printf("%s: command not found\n", cmd)
