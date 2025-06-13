@@ -51,7 +51,7 @@ func executeCommand(path string, args []string) {
 	if err != nil {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(string(output))
+	fmt.Printf("%s\n", string(output))
 }
 
 func findExecutable(cmd string) (absolutePath string, err error) {
