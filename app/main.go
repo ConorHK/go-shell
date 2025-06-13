@@ -23,7 +23,7 @@ func exit(exitCodeStrings []string) {
 
 func echo(inputStrings []string) {
 	outputString := strings.Join(inputStrings, " ")
-	fmt.Println(inputString)
+	fmt.Println(outputString)
 }
 
 func main() {
@@ -43,7 +43,7 @@ func main() {
 		commandArgs := parseCommand(command)
 
 		if commandArgs[0] == "exit" {
-			exit(commandArgs[1])
+			exit(commandArgs[1:])
 		}
 
 		if fn, ok := builtins[commandArgs[0]]; ok {
