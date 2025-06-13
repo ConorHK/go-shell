@@ -49,7 +49,8 @@ func main() {
 		if fn, ok := builtins[commandArgs[0]]; ok {
 			fn(commandArgs[1:])
 		} else {
-			fmt.Fprintf("%s: command not found\n", command)
+			var commandNotFound = command + ": command not found"
+			fmt.Println(commandNotFound)
 		}
 	}
 }
