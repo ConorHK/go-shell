@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 	"strconv"
 	"errors"
@@ -45,7 +46,7 @@ func typeCommand(builtins map[string]func([]string)) func([]string) {
 }
 
 func executeCommand(path string, args []string) {
-	cmd := os.exec.Command(path, strings.Join(args, " "))
+	cmd := exec.Command(path, strings.Join(args, " "))
 	output, err := cmd.Output()
 	if err != nil {
 		fmt.Printf("%v\n", err)
@@ -54,7 +55,7 @@ func executeCommand(path string, args []string) {
 }
 
 func findExecutable(cmd string) (absolutePath string, err error) {
-	absolutePath, err := searchDirectoriesForFile(pathDirectories(), cmd)
+	absolutePath, err = searchDirectoriesForFile(pathDirectories(), cmd)
 	return 
 }
 
