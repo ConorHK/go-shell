@@ -27,7 +27,7 @@ func echo(inputStrings []string) {
 }
 
 func main() {
-	builtins := map[string]func(string){
+	builtins := map[string]func([]string){
 		"exit": exit,
 		"echo": echo,
 	}
