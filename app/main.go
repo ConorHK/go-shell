@@ -84,6 +84,7 @@ func fileExists(path string) bool {
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
+	os.Stdout.Sync()
 
 	builtins := make(map[string]func([]string))
 	builtins["exit"] = exit
