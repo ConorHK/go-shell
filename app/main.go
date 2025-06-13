@@ -65,6 +65,7 @@ func searchDirectoriesForFile(directories []string, fileName string) (string, er
 func fileExists(path string) bool {
 	_, err := os.Stat(path)
 	return !errors.Is(err, os.ErrNotExist)
+}
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
