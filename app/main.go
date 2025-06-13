@@ -26,11 +26,17 @@ func echo(inputStrings []string) {
 	fmt.Println(outputString)
 }
 
-func typeCommand(commands []string, builtins map[string]func([]string)) {
-	if _, ok := builtins[commands[0]]; ok {
-		fmt.Println(commands[0] + " is a shell builtin")
-	} else {
-		invalidCommand(commands[0])
+func typeCommand(builtins map[string]func([]string)) func[]string) {
+	return func(args [] string) {
+		if len(args) == 0 {
+			fmt.Println("type: missing argument")
+			return
+		}
+		if _, ok := builtins[commands[0]]; ok {
+			fmt.Println(commands[0] + " is a shell builtin")
+		} else {
+			invalidCommand(commands[0])
+		}
 	}
 }
 
@@ -43,7 +49,7 @@ func main() {
 	var builtins = map[string]func([]string){
 		"exit": exit,
 		"echo": echo,
-		"type": func(args []string) { typeCommand(builtins, args) },
+		"type": typeCommand(builtins),
 	}
 
 	for {
